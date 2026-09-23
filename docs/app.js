@@ -2,7 +2,6 @@
 
 const vpdFileEl = document.getElementById('vpdFile');
 const srtFileEl = document.getElementById('srtFile');
-const outFilenameEl = document.getElementById('outFilename');
 const statusEl = document.getElementById('status');
 const runBtn = document.getElementById('runBtn');
 
@@ -24,13 +23,6 @@ function readFileAsText(file) {
   });
 }
 
-vpdFileEl.addEventListener('change', () => {
-  const file = vpdFileEl.files[0];
-  if (file && !outFilenameEl.value) {
-    outFilenameEl.value = `${withoutExt(file.name)}_out.vpd`;
-  }
-});
-
 function downloadText(filename, text) {
   const blob = new Blob([text], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -47,11 +39,9 @@ runBtn.addEventListener('click', async () => {
   statusEl.className = '';
   const vpdFile = vpdFileEl.files[0];
   const srtFile = srtFileEl.files[0];
-  const outFilenameRaw = outFilenameEl.value.trim();
 
   if (!vpdFile) return showStatus('VPDファイルを選択してください', true);
   if (!srtFile) return showStatus('SRTファイルを選択してください', true);
-  if (!outFilenameRaw) return showStatus('出力ファイル名を指定してください', true);
 
   runBtn.disabled = true;
   runBtn.textContent = '変換中...';
@@ -74,9 +64,7 @@ runBtn.addEventListener('click', async () => {
     }
 
     const newVpd = replaceSubtitleTrack(vpdObj, srtEntries);
-    const filename = outFilenameRaw.toLowerCase().endsWith('.vpd')
-      ? outFilenameRaw
-      : `${outFilenameRaw}.vpd`;
+    const filename = `${withoutExt(vpdFile.name)}_out.vpd`;
 
     downloadText(filename, JSON.stringify(newVpd, null, 4));
 
