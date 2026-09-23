@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+<title>VPD字幕トラック置換ツール</title>
+<style>
+  body {
+    font-family: "Segoe UI", "Yu Gothic UI", sans-serif;
+    background: #1e1f22;
+    color: #e6e6e6;
+    margin: 0;
+    padding: 24px;
+  }
+  h1 {
+    font-size: 18px;
+    margin: 0 0 20px;
+  }
+  .row {
+    margin-bottom: 16px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    color: #b7b7b7;
+    margin-bottom: 4px;
+  }
+  .inline {
+    display: flex;
+    gap: 8px;
+  }
+  input[type="text"] {
+    flex: 1;
+    background: #2b2d31;
+    border: 1px solid #3f4147;
+    color: #e6e6e6;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+  button {
+    background: #3f4147;
+    border: 1px solid #4c4f56;
+    color: #e6e6e6;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  button:hover {
+    background: #4c4f56;
+  }
+  #runBtn {
+    background: #4c7dff;
+    border-color: #4c7dff;
+    padding: 10px 20px;
+    font-weight: 600;
+  }
+  #runBtn:hover {
+    background: #6a92ff;
+  }
+  #runBtn:disabled {
+    background: #3f4147;
+    border-color: #4c4f56;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  #status {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    white-space: pre-wrap;
+    display: none;
+  }
+  #status.ok {
+    display: block;
+    background: #1f3a24;
+    border: 1px solid #2f6b3a;
+    color: #b7f0c0;
+  }
+  #status.err {
+    display: block;
+    background: #3a1f1f;
+    border: 1px solid #6b2f2f;
+    color: #f0b7b7;
+  }
+</style>
+</head>
+<body>
+  <h1>VPD字幕トラック置換ツール</h1>
+
+  <div class="row">
+    <label for="vpdPath">VPDファイル</label>
+    <div class="inline">
+      <input type="text" id="vpdPath" placeholder="input.vpd" />
+      <button id="browseVpd">参照...</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="srtPath">SRTファイル</label>
+    <div class="inline">
+      <input type="text" id="srtPath" placeholder="input.srt" />
+      <button id="browseSrt">参照...</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="outFolder">出力フォルダ</label>
+    <div class="inline">
+      <input type="text" id="outFolder" placeholder="出力先フォルダ" />
+      <button id="browseFolder">フォルダを選択...</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <label for="outFilename">出力ファイル名</label>
+    <div class="inline">
+      <input type="text" id="outFilename" placeholder="output.vpd" />
+      <button id="browseSaveAs">名前を付けて保存...</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <button id="runBtn">変換実行</button>
+  </div>
+
+  <div id="status"></div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

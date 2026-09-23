@@ -1,0 +1,15 @@
+{
+  "name": "lyricsvpd",
+  "version": "1.0.0",
+  "description": "VPDファイルの字幕トラックをSRTファイルの内容で置き換えるツール",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "electron": "^32.0.0"
+  }
+}
